@@ -18,6 +18,11 @@ jobs:
         with:
           go-version: "1.22"
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y apt-utils
+
       - name: Build app
         run: ./scripts/buildprod.sh
 

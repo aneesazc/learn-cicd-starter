@@ -16,7 +16,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.22'
+          go-version: "1.22"
 
       - name: Build app
         run: ./scripts/buildprod.sh
@@ -34,4 +34,6 @@ jobs:
 
       - name: Build and push Docker image
         run: gcloud builds submit --tag us-central1-docker.pkg.dev/notely3/notely-ar-repo3/notely3:latest .
-        
+
+      - name: Deploy to Cloud Run
+        run: gcloud run deploy notely3 --image us-central1-docker.pkg.dev/notely3/notely-ar-repo3/notely3:latest --region us-central1 --allow-unauthenticated --project notely3 --max-instances=4
